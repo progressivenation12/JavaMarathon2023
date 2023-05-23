@@ -2,12 +2,11 @@ package day14;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) throws FileNotFoundException {
-        printSumDigits(new File("Day14File"));
+        printSumDigits(new File("resources/Day14File"));
     }
 
     static void printSumDigits(File file) {

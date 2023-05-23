@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(parseFileToStringList(new File("Day14People")));
+        System.out.println(parseFileToStringList(new File("resources/Day14People")));
     }
 
     public static List<String> parseFileToStringList(File file) {
