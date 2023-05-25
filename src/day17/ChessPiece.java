@@ -20,8 +20,4 @@ public enum ChessPiece {
     public String getSymbol() {
         return symbol;
     }
-
-    public double getValue() {
-        return value;
-    }
 }
