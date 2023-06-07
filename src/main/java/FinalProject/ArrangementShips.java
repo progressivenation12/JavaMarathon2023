@@ -14,19 +14,19 @@ public class ArrangementShips {
     public static void main(String[] args) {
         for (shipSize = 4; shipSize >= 1; shipSize--) {
             for (shipAmount = 1; shipAmount <= 5 - shipSize; shipAmount++) {
-                System.out.println("Расставляем корабль размером " + shipSize);
+//                System.out.println("Расставляем корабль размером " + shipSize);
 
                 do {
                     fieldString = getRandomNumber(1, 10);
                     fieldColumn = getRandomNumber(1, 10);
                     shipRoute = getRandomNumber(0, 1);
 
-                    switch (shipRoute) {
-                        case (0) ->
-                                System.out.printf("  Координаты корабля: %2d,%2d. Направление гризонталь.\n", fieldString, fieldColumn);
-                        case (1) ->
-                                System.out.printf("  Координаты корабля: %2d,%2d. Направление вертикаль.\n", fieldString, fieldColumn);
-                    }
+//                    switch (shipRoute) {
+//                        case (0) ->
+//                                System.out.printf("  Координаты корабля: %2d,%2d. Направление гризонталь.\n", fieldString, fieldColumn);
+//                        case (1) ->
+//                                System.out.printf("  Координаты корабля: %2d,%2d. Направление вертикаль.\n", fieldString, fieldColumn);
+//                    }
 
                     canPut = abilityPutShip(fieldString, fieldColumn, shipRoute, shipSize);
 
@@ -38,8 +38,11 @@ public class ArrangementShips {
             }
         }
 
-        for (int[] ints : battlefield) {
-            for (int anInt : ints) {
+        System.out.println();
+        for (int i = 1; i < battlefield.length - 1; i++) {
+            int[] ints = battlefield[i];
+            for (int j = 1; j < ints.length - 1; j++) {
+                int anInt = ints[j];
                 System.out.print(anInt + "\t");
             }
             System.out.println();
@@ -47,44 +50,42 @@ public class ArrangementShips {
     }
 
     static boolean abilityPutShip(int fieldString, int fieldColumn, int shipRoute, int shipSize) {
-        boolean result = true;
 
         if (shipRoute == 0) {
             if (fieldColumn + shipSize > 11) {
-                result = false;
+                return false;
             }
         }
 
         if (shipRoute == 1) {
             if (fieldString + shipSize > 11) {
-                result = false;
+                return false;
             }
         }
 
         for (int i = 0; i < shipSize; i++) {
             if (battlefield[fieldString][fieldColumn] != 0) {
-                result = false;
-                break;
+                return false;
             }
 
-            if (shipRoute == 0) {
-                fieldColumn += 1;           //направление по горизонтали
-            } else if (shipRoute == 1) {
-                fieldString += 1;           //направление по вертикали
+            if (shipRoute == 0) {           //направление по горизонтали
+                fieldColumn += 1;
+            } else if (shipRoute == 1) {    //направление по вертикали
+                fieldString += 1;
             }
         }
-        return result;
+        return true;
     }
 
     static void putShip(int fieldString, int fieldColumn, int shipRoute, int shipSize) {
         //занимаем поле вокруг будующего корабля
-        if (shipRoute == 0) {           //направление по горизонтали
+        if (shipRoute == 0) {               //направление по горизонтали
             for (int i = fieldString - 1; i <= fieldString + 1; i++) {
                 for (int j = fieldColumn - 1; j <= fieldColumn + shipSize; j++) {
                     battlefield[i][j] = 5;
                 }
             }
-        } else if (shipRoute == 1) {    //направление по вертикали
+        } else if (shipRoute == 1) {        //направление по вертикали
             for (int i = fieldString - 1; i <= fieldString + shipSize; i++) {
                 for (int j = fieldColumn - 1; j <= fieldColumn + 1; j++) {
                     battlefield[i][j] = 5;
